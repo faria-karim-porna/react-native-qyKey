@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "QyKey",
+    "slug": "qykey",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "com.qykey",
+      "permissions": [
+        "android.permission.VIBRATE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "blockedPermissions": [
+        "android.permission.READ_CONTACTS",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "adaptiveIcon": {
+        "backgroundColor": "#0a0a1a",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "scheme": "qykey",
+    "plugins": [
+      "expo-router",
+      "./plugins/withImeService",
+      "./plugins/withKeyboardBundle",
+      "./plugins/withAccessibilityService",
+      "expo-speech-recognition"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9a5469e3-fd63-4c3f-a856-551d30c0e727"
+      }
+    },
+    "owner": "fariakarim"
+  }
+}

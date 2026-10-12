@@ -1,0 +1,18 @@
+# Force git to never touch line endings in binary files (prevents CRLF->LF corruption)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.bin binary
+*.mp3 binary
+*.mp4 binary
+*.wav binary
+*.zip binary
+*.keystore binary
+*.jks binary
