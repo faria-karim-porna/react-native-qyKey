@@ -1,6 +1,6 @@
 Email: myselffariakarimporna@gmail.com
-Download Link: https://expo.dev/artifacts/eas/GtROySc4SK5OI97Q4k5NLjZHqPA4-MbfcYyffVmsH7E.apk
-Status: Add Qykey With Circuit Background, Speech Recognition, Partially Fix Emoji, Backspace Icon, Configuration Steps, Menus And Tabs, Overlay, Dark Theme, Fix Settings And Dictionary Issue, Fix Theme, Fix Customize Keyboard, Partially Fixed Folder Structure, Migration To QyKey, Fix Customized Cursor, Touchpad Button Functionality, Fix Color Selection, Keyboard Area
+Download Link: https://expo.dev/artifacts/eas/k5p02XUE_xKdZ1BSD3v-6J6qhFa867oVFsY4UiiqCEY.apk
+Status: Add Qykey With Circuit Background, Speech Recognition, Partially Fix Emoji, Backspace Icon, Configuration Steps, Menus And Tabs, Overlay, Dark Theme, Fix Settings And Dictionary Issue, Fix Theme, Fix Customize Keyboard, Partially Fixed Folder Structure, Migration To QyKey, Fix Customized Cursor, Touchpad Button Functionality, Fix Color Selection, Keyboard Area, Move to main and Renamed to QyKey Repository
 
 
 Bangla to English Conversion: https://chatgpt.com/c/6a3d5c31-c684-83e8-8b51-eda4710b19c4
@@ -27,8 +27,8 @@ Claude Planning: https://claude.ai/chat/e6deb938-fe18-4256-8196-806aa89ac08e
 19. [Done] Fix keyboard size and key gap
 20. [Done] Fix Settings Tab Cursor Should be Functional
 21. [Done] Fix Touchpad click event
-22. Fix repository (kaalke)
-23. Move to main branch (kaalke)
+22. [Done] Fix repository
+23. [Done] Move to main branch
 24. Find and fix other issues
     1. [Done] Fix Color of the mic in the dark mode
     2. [Done] After installation why 3rd and 4th steps are not showing of on boarding
