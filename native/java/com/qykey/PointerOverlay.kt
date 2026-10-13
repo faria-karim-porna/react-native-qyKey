@@ -30,7 +30,8 @@ import com.caverock.androidsvg.SVG
  * Cursor is drawn by a pure-native [CursorView] (Canvas-based) rendered as a modern
  * macOS / Windows 11 style sleek pointer with soft drop shadow and crisp outline.
  * Screen overlay is drawn by a pure-native [TouchpadOverlayView] (Canvas-based)
- * covering the entire screen except the keyboard area with 50% opacity red.
+ * covering the entire screen except the keyboard area — the paint is fully
+ * transparent, so only the window lifecycle/bounds management remains.
  * Movement is pure WindowManager.updateViewLayout() — no re-renders.
  *
  * Window type priority:
@@ -271,7 +272,7 @@ object PointerOverlay {
     // ── Public API ────────────────────────────────────────────────────────
 
     /**
-     * Shows the cursor overlay and touch-through red screen overlay. Returns false when no overlay channel is
+     * Shows the cursor overlay and touch-through (fully transparent) screen overlay. Returns false when no overlay channel is
      * available (JS then shows the permission banner). Main thread only.
      */
     fun show(context: Context): Boolean {
@@ -437,7 +438,7 @@ object PointerOverlay {
             } catch (e: Exception) {}
             cursorView = null
 
-            // 1. Red translucent touch-through screen overlay (covers screen from the very top of the device down to the keyboard)
+            // 1. Fully transparent touch-through screen overlay (covers screen from the very top of the device down to the keyboard; no visible tint)
             val overlayTopY = getOverlayTopY()
             val redOverlay = TouchpadOverlayView(targetContext)
             val overlayParams = WindowManager.LayoutParams(
@@ -499,11 +500,13 @@ object PointerOverlay {
         }
     }
 
-    // ── Native touch-through red overlay drawing ───────────────────────────
+    // ── Native touch-through (transparent) overlay drawing ─────────────────
 
     private class TouchpadOverlayView(ctx: Context) : View(ctx) {
         private val paint = Paint().apply {
-            color = Color.argb(128, 255, 0, 0) // 50% opacity red (#80FF0000)
+            // Fully transparent — no visible tint at all (was 50% red).
+            // The overlay window stays attached for bounds management only.
+            color = Color.TRANSPARENT
             style = Paint.Style.FILL
         }
 

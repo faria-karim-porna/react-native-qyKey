@@ -38,14 +38,14 @@ Claude Planning: https://claude.ai/chat/e6deb938-fe18-4256-8196-806aa89ac08e
     6. [Done] padding in emoji keyboard
     7. [Done] keyboard icon alignment on
     8. [Done] Tab of emoji keyboard overflows
-    9. Vertical alignment of text after increasing key height
-    10. After clicking accessibility should also force to on
-    11. emoji, pointer, sym switching issue find
-    12. Gap in the emoji keyboard for people
-    13. UI of overlay alert and forward navigation alert
-    14. Forward navigation is not working
-    15. Windows button is working on double click
-    16. Make the overlay transparent
+    9. (*) Forward navigation is not working
+    10. (*) Windows button is working on double click
+    11. Make the overlay transparent
+    12. UI of overlay alert and forward navigation alert
+    13. Gap in the emoji keyboard for people
+    14. After clicking accessibility should also force to on
+    15. Vertical alignment of text after increasing key height
+    16. emoji, pointer, sym switching issue find
     17. Test touchpad dragging work if not fix it
 25. [Done] Fix Touchpad overlay size
 26. [Done] Fix Touchpad button event
