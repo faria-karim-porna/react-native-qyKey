@@ -168,9 +168,15 @@ const EmojiBoardComponent = ({
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
+          // FlatList passes ROW indices here when numColumns > 1
+          // (VirtualizedList sees COLUMNS-chunked items — see FlatList._getItem/
+          // _getItemCount in the RN source). Dividing by COLUMNS again
+          // compressed the claimed offsets ~6× with repeated plateaus, which
+          // misaligned the virtualizer's window and left huge blank gaps
+          // mid-list. Offsets must be ROW_HEIGHT × rowIndex directly.
           getItemLayout={(_, index) => ({
             length: ROW_HEIGHT,
-            offset: ROW_HEIGHT * Math.floor(index / COLUMNS),
+            offset: ROW_HEIGHT * index,
             index,
           })}
           initialNumToRender={COLUMNS * 5}
