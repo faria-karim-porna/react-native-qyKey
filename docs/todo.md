@@ -40,8 +40,8 @@ Claude Planning: https://claude.ai/chat/e6deb938-fe18-4256-8196-806aa89ac08e
     8. [Done] Tab of emoji keyboard overflows
     9. (*) Forward navigation is not working
     10. (*) Windows button is working on double click
-    11. Make the overlay transparent
-    12. UI of overlay alert and forward navigation alert
+    11. (*) Make the overlay transparent
+    12. (*) UI of overlay alert and forward navigation alert
     13. Gap in the emoji keyboard for people
     14. After clicking accessibility should also force to on
     15. Vertical alignment of text after increasing key height
