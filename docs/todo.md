@@ -1,5 +1,5 @@
 Email: myselffariakarimporna@gmail.com
-Download Link: https://expo.dev/artifacts/eas/k5p02XUE_xKdZ1BSD3v-6J6qhFa867oVFsY4UiiqCEY.apk
+Download Link: https://expo.dev/artifacts/eas/4YPy5mdhrBIY-XfWceZF7uvhQGcEeeCF9xfFqwloZAc.apk
 Status: Add Qykey With Circuit Background, Speech Recognition, Partially Fix Emoji, Backspace Icon, Configuration Steps, Menus And Tabs, Overlay, Dark Theme, Fix Settings And Dictionary Issue, Fix Theme, Fix Customize Keyboard, Partially Fixed Folder Structure, Migration To QyKey, Fix Customized Cursor, Touchpad Button Functionality, Fix Color Selection, Keyboard Area, Move to main and Renamed to QyKey Repository
 
 
@@ -39,22 +39,25 @@ Claude Planning: https://claude.ai/chat/e6deb938-fe18-4256-8196-806aa89ac08e
     7. [Done] keyboard icon alignment on
     8. [Done] Tab of emoji keyboard overflows
     9. [Done] Vertical alignment of text after increasing key height
-    10. (*) Forward navigation is not working
-    11. (*) Windows button is working on double click
-    12. (*) Make the overlay transparent
-    13. (*) UI of overlay alert and forward navigation alert
-    14. (*) Gap in the emoji keyboard for people
-    15. After clicking accessibility should also force to on
+    10. [Done] Windows button is working on double click
+    11. [Done] Make the overlay transparent
+    12. [Done] UI of overlay alert and forward navigation alert
+    13. [Done] Gap in the emoji keyboard for people
+    14. [Done] After clicking accessibility should also force to on
+    15. Forward navigation is not working
     16. introduce two new icons for windows and shift
     17. emoji, pointer, sym switching issue find
     18. Test touchpad dragging work if not fix it
+    19. Keyboard height increase issue
+    20. Check does add custom word works
 25. [Done] Fix Touchpad overlay size
 26. [Done] Fix Touchpad button event
-27. Decrease Screen size [if possible]
-28. Add Icons
-29. Fix splash screen
-30. Fix cache issue
-31. Refactor Code
-32. Make it optimized
-33. Write Documentation
-34. Understand Code
+27. Add Icons
+28. Fix splash screen
+29. Decrease Screen size [if possible]
+30. Why the pc cursor and the touchpad cursor move in the same direction while access pc
+31. Fix cache issue
+32. Refactor Code
+33. Make it optimized
+34. Write Documentation
+35. Understand Code
