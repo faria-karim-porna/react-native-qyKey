@@ -430,7 +430,7 @@ export default function Touchpad({
           style={[styles.touchpadBanner, { position: 'absolute', bottom: 78, alignSelf: 'center', zIndex: 10 }]}
         >
           <Text style={styles.touchpadBannerText}>
-            Forward not available — tap a text field first
+            No forward history available
           </Text>
         </View>
       )}

@@ -697,12 +697,51 @@ class QyKeyModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 }
                 promise.resolve(handled)
             } else {
-                // Forward: no GLOBAL_ACTION_FORWARD and a11y cannot inject keys.
-                // Best effort = click a visible app-provided Forward control
-                // (browsers' toolbar forward_button), else scroll-forward on
-                // the focused node; JS shows a subtle hint when this resolves
-                // false. (Pro mode = M4.)
-                promise.resolve(svc?.navigateForward() ?: false)
+                // Forward navigation strategy (no GLOBAL_ACTION_FORWARD on any
+                // Android version):
+                //
+                // ① Accessibility service path (preferred):
+                //    clickForwardControl() BFS-clicks the browser's Forward toolbar
+                //    button (Chrome: forward_button id); falls back to scroll-forward
+                //    on the focused node.
+                //
+                // ② KEYCODE_FORWARD fallback (Android 11+ and physical-keyboard mode):
+                //    Chrome and other browsers handle KeyEvent.KEYCODE_FORWARD the same
+                //    way as pressing a physical keyboard's browser-forward key.  This
+                //    covers the case where the a11y service is unavailable, OR where
+                //    the BFS found no forward button (e.g. the button is off-screen or
+                //    the node cap was hit) — and also the no-service case.
+                //    We resolve true optimistically here (there is no synchronous
+                //    feedback from a key event), so the "not supported" hint is only
+                //    shown when neither path could run.
+                val svcHandled = svc?.navigateForward() ?: false
+                if (svcHandled) {
+                    hapticManager?.vibrate()
+                    promise.resolve(true)
+                    return@post
+                }
+                // Secondary fallback: inject KEYCODE_FORWARD via InputConnection.
+                // This reaches the foreground app the same way a hardware forward key
+                // would — browsers (Chrome, Firefox, Samsung Internet) handle it
+                // natively on Android 11.
+                val ic = getInputConnection()
+                if (ic != null) {
+                    val now = SystemClock.uptimeMillis()
+                    val flags = KeyEvent.FLAG_SOFT_KEYBOARD or KeyEvent.FLAG_KEEP_TOUCH_MODE
+                    val deviceId = android.view.KeyCharacterMap.VIRTUAL_KEYBOARD
+                    ic.sendKeyEvent(
+                        KeyEvent(now, now, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_FORWARD,
+                            0, 0, deviceId, 0, flags)
+                    )
+                    ic.sendKeyEvent(
+                        KeyEvent(now, now, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_FORWARD,
+                            0, 0, deviceId, 0, flags)
+                    )
+                    hapticManager?.vibrate()
+                    promise.resolve(true)
+                } else {
+                    promise.resolve(false)
+                }
             }
         }
     }

@@ -523,12 +523,18 @@ class QyKeyAccessibilityService : AccessibilityService() {
         performScrollOnFocusedNode(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
 
     /**
-     * BFS over the active window looking for a *clickable* node the app itself
-     * labels as forward (Chrome: `com.android.chrome:id/forward_button`;
-     * other browsers reuse the id suffix or put "Forward" in the content
-     * description). We only read the id suffix / content description of
-     * clickable controls, and only on an explicit user button press — no
+     * BFS over the active window looking for a node the app itself labels as
+     * forward (Chrome: `com.android.chrome:id/forward_button`; Brave, Edge,
+     * Opera, Firefox reuse the id suffix or put "Forward" in the content
+     * description). We only read the id suffix / content description / text of
+     * identified controls, and only on an explicit user button press — no
      * general content traversal.
+     *
+     * NOTE: On Android 11, Chrome (and several other browsers) reports the
+     * forward toolbar button with `isClickable = false` even when forward
+     * history is available. The `isClickable` flag is therefore NOT used to
+     * gate the match — `performAction(ACTION_CLICK)` is the definitive test:
+     * it returns true when the platform accepted the click, false otherwise.
      */
     private fun clickForwardControl(): Boolean {
         val root = rootInActiveWindow ?: return false
@@ -538,6 +544,9 @@ class QyKeyAccessibilityService : AccessibilityService() {
         while (queue.isNotEmpty() && visited < FORWARD_SEARCH_MAX_NODES) {
             val node = queue.removeFirst()
             visited++
+            // Attempt the click regardless of isClickable — on Android 11
+            // Chrome reports isClickable=false for the forward button even
+            // when it is actionable; let performAction be the authority.
             if (isForwardControl(node) &&
                 node.performAction(AccessibilityNodeInfo.ACTION_CLICK)
             ) {
@@ -552,9 +561,16 @@ class QyKeyAccessibilityService : AccessibilityService() {
         return false
     }
 
+    /**
+     * Returns true when [node] looks like a browser Forward navigation control.
+     * Matches on view-id suffix, content description, or visible text — all
+     * lowercased for locale-safety. The `isClickable` check is intentionally
+     * omitted: Chrome on Android 11 reports isClickable=false for the forward
+     * button regardless of whether forward history exists, so restricting to
+     * clickable nodes would silently skip it every time.
+     */
     private fun isForwardControl(node: AccessibilityNodeInfo?): Boolean {
         node ?: return false
-        if (!node.isClickable) return false
         node.viewIdResourceName
             ?.substringAfterLast('/', "")
             ?.lowercase()
@@ -564,6 +580,13 @@ class QyKeyAccessibilityService : AccessibilityService() {
             ?.toString()
             ?.lowercase()
             ?.takeIf { it.contains("forward") }
+            ?.let { return true }
+        // Fallback: some browsers (Firefox, Samsung Internet) use visible button
+        // text instead of a content description.
+        node.text
+            ?.toString()
+            ?.lowercase()
+            ?.takeIf { it == "forward" || it == "go forward" }
             ?.let { return true }
         return false
     }
