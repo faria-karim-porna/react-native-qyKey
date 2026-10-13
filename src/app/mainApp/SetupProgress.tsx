@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { useAppColors } from '@/hooks/useAppColors';
 
 interface SetupProgressProps {
-  currentStep: 1 | 2 | 3 | 4;
+  currentStep: 1 | 2 | 3 | 4 | 5;
 }
 
 export default function SetupProgress({ currentStep }: SetupProgressProps) {
@@ -11,7 +11,7 @@ export default function SetupProgress({ currentStep }: SetupProgressProps) {
 
   return (
     <View style={styles.row}>
-      {[1, 2, 3, 4].map((step) => (
+      {[1, 2, 3, 4, 5].map((step) => (
         <View
           key={step}
           style={[

@@ -414,6 +414,37 @@ export function createKeyboardStyles(colors: KeyboardThemeColors) {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    // Shared look for the touchpad's floating banners (pointer-permission
+    // banner, forward hint). Adaptive: light theme → light card (same palette
+    // as the keys), dark theme → dark card; accent text uses themePrimary.
+    // Positioning (top/bottom/left/right) is applied by each usage inline.
+    touchpadBanner: {
+      backgroundColor: colors.keyBg,
+      borderRadius: 8,
+      borderTopWidth: 2,
+      borderLeftWidth: 2,
+      borderTopColor: insetTL,
+      borderLeftColor: insetTL,
+      borderBottomWidth: 1,
+      borderRightWidth: 1,
+      borderBottomColor: insetBR,
+      borderRightColor: insetBR,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      elevation: 6,
+    },
+    touchpadBannerText: {
+      color: colors.keyText,
+      fontSize: 9,
+      textAlign: 'center',
+    },
+    touchpadBannerAction: {
+      color: colors.themePrimary,
+      fontSize: 9,
+      fontWeight: 'bold' as const,
+      textAlign: 'center',
+      marginTop: 4,
+    },
     tabContainer: {
       flex: 1,
       minWidth: 30,

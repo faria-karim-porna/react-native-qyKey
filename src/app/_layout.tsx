@@ -33,7 +33,7 @@ export default function RootLayout() {
   const segments = useSegments();
   const insets = useSafeAreaInsets();
   const hasCompletedOnboarding = useSettingsStore((s) => s.hasCompletedOnboarding);
-  const { isEnabled, isDefault, isOverlayGranted, isFullySetUp, isLoading } = useSetupStatus();
+  const { isEnabled, isDefault, isOverlayGranted, isAccessibilityEnabled, isFullySetUp, isLoading } = useSetupStatus();
   const colors = useAppColors();
 
   // Build a KeyboardThemeColors-compatible object for the Circuit
@@ -78,7 +78,12 @@ export default function RootLayout() {
           ? '/mainApp/onboarding/step2-default'
           : !isOverlayGranted
             ? '/mainApp/onboarding/step3-overlay'
-            : '/mainApp/onboarding/step4-done';
+            // A11y service is mandatory — the touchpad's tap/click/scroll
+            // and Back/Forward actions run through it and nothing else can
+            // substitute, so it gates before the done screen.
+            : !isAccessibilityEnabled
+              ? '/mainApp/onboarding/step4-accessibility'
+              : '/mainApp/onboarding/step5-done';
       if (lastRedirectRef.current !== targetStep) {
         lastRedirectRef.current = targetStep;
         router.replace(targetStep as any);
@@ -87,7 +92,8 @@ export default function RootLayout() {
       lastRedirectRef.current = '/mainApp';
       router.replace('/mainApp');
     }
-  }, [hasCompletedOnboarding, isFullySetUp, isEnabled, isDefault, isOverlayGranted, isLoading, segments, router]);
+  }, [hasCompletedOnboarding, isFullySetUp, isEnabled, isDefault, isOverlayGranted, isAccessibilityEnabled, isLoading, segments, router]);
+
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.rootBg }]} edges={['top']}>

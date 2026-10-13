@@ -21,7 +21,7 @@ export default function Step4Done() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SetupProgress currentStep={4} />
+      <SetupProgress currentStep={5} />
 
       <View style={styles.iconContainer}>
         <CelebrateIcon size={64} />

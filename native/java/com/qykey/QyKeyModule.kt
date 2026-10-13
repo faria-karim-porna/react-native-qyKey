@@ -698,9 +698,11 @@ class QyKeyModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 promise.resolve(handled)
             } else {
                 // Forward: no GLOBAL_ACTION_FORWARD and a11y cannot inject keys.
-                // Best effort = scroll-forward on the focused node; JS shows a
-                // subtle hint when this resolves false. (Pro mode = M4.)
-                promise.resolve(svc?.scrollForwardOnNode() ?: false)
+                // Best effort = click a visible app-provided Forward control
+                // (browsers' toolbar forward_button), else scroll-forward on
+                // the focused node; JS shows a subtle hint when this resolves
+                // false. (Pro mode = M4.)
+                promise.resolve(svc?.navigateForward() ?: false)
             }
         }
     }

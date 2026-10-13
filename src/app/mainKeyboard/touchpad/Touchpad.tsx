@@ -410,25 +410,15 @@ export default function Touchpad({
 
       {showPermissionBanner && (
         <View
-          style={{
-            position: 'absolute',
-            top: 12,
-            left: 12,
-            right: 12,
-            zIndex: 10,
-            backgroundColor: 'rgba(0, 0, 0, 0.78)',
-            borderRadius: 8,
-            paddingHorizontal: 8,
-            paddingVertical: 6,
-          }}
+          style={[styles.touchpadBanner, { position: 'absolute', top: 12, left: 12, right: 12, zIndex: 10 }]}
         >
           <Pressable onPress={showPointerAndCheck}>
-            <Text style={{ color: '#fff', fontSize: 9, textAlign: 'center' }}>
+            <Text style={styles.touchpadBannerText}>
               Mouse pointer hidden — enable "Display over other apps"
             </Text>
           </Pressable>
           <Pressable onPress={() => onRequestPointerPermissionRef.current?.()}>
-            <Text style={{ color: themeColors.themePrimary, fontSize: 9, fontWeight: 'bold', textAlign: 'center', marginTop: 4 }}>
+            <Text style={styles.touchpadBannerAction}>
               GRANT →
             </Text>
           </Pressable>
@@ -437,18 +427,9 @@ export default function Touchpad({
 
       {forwardHint && (
         <View
-          style={{
-            position: 'absolute',
-            bottom: 78,
-            alignSelf: 'center',
-            zIndex: 10,
-            backgroundColor: 'rgba(0, 0, 0, 0.78)',
-            borderRadius: 8,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-          }}
+          style={[styles.touchpadBanner, { position: 'absolute', bottom: 78, alignSelf: 'center', zIndex: 10 }]}
         >
-          <Text style={{ color: '#fff', fontSize: 9, textAlign: 'center' }}>
+          <Text style={styles.touchpadBannerText}>
             Forward not available — tap a text field first
           </Text>
         </View>

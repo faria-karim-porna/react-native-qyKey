@@ -73,6 +73,11 @@ class QyKeyAccessibilityService : AccessibilityService() {
         @Volatile
         var instance: QyKeyAccessibilityService? = null
             private set
+
+        // Forward-click search: BFS cap so pathological view trees can't stall
+        // the IME process while the user waits on the chevron press.
+        private const val FORWARD_SEARCH_MAX_NODES = 200
+
     }
 
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -505,9 +510,63 @@ class QyKeyAccessibilityService : AccessibilityService() {
         return true
     }
 
-    /** Forward chevron: no global action exists; best effort = scroll-forward on the focused node. */
+    /** Forward chevron: no global action exists. Order: ① click a visible
+     *  app-provided Forward control (browsers expose a `...:id/forward_button`
+     *  toolbar node — Chrome, Brave, Edge, Opera…), ② scroll-forward on the
+     *  focused node. Returns true when either handled the action. */
+    fun navigateForward(): Boolean =
+        clickForwardControl() ||
+            performScrollOnFocusedNode(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+
+    /** @deprecated use [navigateForward]; retained for M3 reference. */
     fun scrollForwardOnNode(): Boolean =
         performScrollOnFocusedNode(AccessibilityNodeInfo.ACTION_SCROLL_FORWARD)
+
+    /**
+     * BFS over the active window looking for a *clickable* node the app itself
+     * labels as forward (Chrome: `com.android.chrome:id/forward_button`;
+     * other browsers reuse the id suffix or put "Forward" in the content
+     * description). We only read the id suffix / content description of
+     * clickable controls, and only on an explicit user button press — no
+     * general content traversal.
+     */
+    private fun clickForwardControl(): Boolean {
+        val root = rootInActiveWindow ?: return false
+        val queue = ArrayDeque<AccessibilityNodeInfo>()
+        queue.addLast(root)
+        var visited = 0
+        while (queue.isNotEmpty() && visited < FORWARD_SEARCH_MAX_NODES) {
+            val node = queue.removeFirst()
+            visited++
+            if (isForwardControl(node) &&
+                node.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+            ) {
+                return true
+            }
+            var i = node.childCount
+            while (i > 0) {
+                i--
+                node.getChild(i)?.let { queue.addLast(it) }
+            }
+        }
+        return false
+    }
+
+    private fun isForwardControl(node: AccessibilityNodeInfo?): Boolean {
+        node ?: return false
+        if (!node.isClickable) return false
+        node.viewIdResourceName
+            ?.substringAfterLast('/', "")
+            ?.lowercase()
+            ?.takeIf { it.contains("forward") }
+            ?.let { return true }
+        node.contentDescription
+            ?.toString()
+            ?.lowercase()
+            ?.takeIf { it.contains("forward") }
+            ?.let { return true }
+        return false
+    }
 
     /** Walks up from the focused node performing [action] until one handles it. */
     private fun performScrollOnFocusedNode(action: Int): Boolean {
