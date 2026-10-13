@@ -112,6 +112,50 @@ export function OverlayIcon({ size = 56 }: { size?: number }) {
   );
 }
 
+// ─── Accessibility Icon (universal-access person, for the mandatory a11y step) ─┐
+export function AccessibilityIcon({ size = 56 }: { size?: number }) {
+  const colors = useAppColors();
+  return (
+    <Svg width={size} height={size} viewBox="0 0 56 56">
+      {/* Head */}
+      <Circle cx="28" cy="12" r="5" fill={colors.accent} />
+      {/* Arms swept open — universal access figure */}
+      <Path
+        d="M12 24 Q28 19 44 24"
+        stroke={colors.accent}
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Body connects beneath the arms */}
+      <Path
+        d="M28 22 L28 36"
+        stroke={colors.accent}
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Legs */}
+      <Path
+        d="M28 36 L20 50"
+        stroke={colors.accent}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <Path
+        d="M28 36 L36 50"
+        stroke={colors.accent}
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </Svg>
+  );
+}
+
 // ─── Step Circle (replaces numbered text in cards) ─────────────────────────
 interface StepCircleProps {
   number: number;

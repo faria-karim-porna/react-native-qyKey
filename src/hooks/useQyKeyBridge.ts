@@ -48,5 +48,11 @@ export function useQyKeyBridge() {
     openOverlaySettings: (): void => {
       if (isAvailable) QyKey.openOverlaySettings();
     },
+
+    isAccessibilityEnabled: (): Promise<boolean> =>
+      isAvailable ? QyKey.isAccessibilityEnabled() : Promise.resolve(false),
+    openAccessibilitySettings: (): void => {
+      if (isAvailable) QyKey.openAccessibilitySettings();
+    },
   };
 }

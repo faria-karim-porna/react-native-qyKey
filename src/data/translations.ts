@@ -106,7 +106,15 @@ const translations = {
     skipForNow: 'Skip for now',
     step3Hint: 'You can always enable this later in Settings.',
 
-    // Onboarding Step 4
+    // Onboarding Step 4 (mandatory accessibility grant)
+    enableA11yTitle: 'Enable Accessibility Service',
+    step4A11yDescription: 'QyKey needs its Accessibility service turned on to perform touchpad actions — tap, click, scrolling and Back/Forward target other apps through it, and no other permission can substitute. This step is required.',
+    step4A11yStep1: 'Tap the button below',
+    step4A11yStep2: 'Find "QyKey Accessibility" under Installed/Downloaded apps',
+    step4A11yStep3: 'Toggle it on and come back to this app',
+    step4A11yHint: 'This step is required: without the Accessibility service, touchpad clicks, scrolling and Back/Forward cannot act on other apps. This screen advances automatically once it is on.',
+
+    // Onboarding Step 5
     allSet: "You're All Set!",
     step4Description: 'QyKey is ready to use. Tap any text field in any app and your new keyboard will appear. You can switch languages anytime with the globe button, and customize your experience in the Settings tab.',
     startUsingQyKey: 'Start Using QyKey',
@@ -217,7 +225,15 @@ const translations = {
     skipForNow: 'এখন এড়িয়ে যান',
     step3Hint: 'আপনি সবসময় পরে সেটিংসে এটি সক্রিয় করতে পারবেন।',
 
-    // Onboarding Step 4
+    // Onboarding Step 4 (আবশ্যিক accessibility grant)
+    enableA11yTitle: 'প্রবেশযোগ্যতা সেবা সক্রিয় করুন',
+    step4A11yDescription: 'টাচপ্যাডের অ্যাকশন — ট্যাপ, ক্লিক, স্ক্রল এবং Back/Forward — অন্যান্য অ্যাপে কাজ করানোর জন্য QyKey-এর প্রবেশযোগ্যতা সেবা সক্রিয় থাকতে হবে; অন্য কোনো অনুমতি এর বিকল্প নয়। এই ধাপটি আবশ্যক।',
+    step4A11yStep1: 'নিচের বোতামে ট্যাপ করুন',
+    step4A11yStep2: 'Installed/Downloaded অ্যাপগুলোর মধ্যে "QyKey Accessibility" খুঁজুন',
+    step4A11yStep3: 'এটি চালু করে এই অ্যাপে ফিরে আসুন',
+    step4A11yHint: 'এই ধাপটি আবশ্যক: প্রবেশযোগ্যতা সেবা ছাড়া টাচপ্যাডের ক্লিক, স্ক্রল ও Back/Forward অন্যান্য অ্যাপে কাজ করতে পারে না। সক্রিয় হলে এই স্ক্রিন স্বয়ংক্রিয়ভাবে এগিয়ে যাবে।',
+
+    // Onboarding Step 5
     allSet: 'আপনি সব সেট করে ফেলেছেন!',
     step4Description: 'QyKey ব্যবহারের জন্য প্রস্তুত। যেকোনো অ্যাপে যেকোনো টেক্সট ফিল্ডে ট্যাপ করুন এবং আপনার নতুন কীবোর্ড দেখাবে। গ্লোব বোতাম দিয়ে যেকোনো সময় ভাষা পরিবর্তন করতে পারবেন, এবং সেটিংস ট্যাবে আপনার অভিজ্ঞতা কাস্টমাইজ করতে পারবেন।',
     startUsingQyKey: 'QyKey ব্যবহার শুরু করুন',

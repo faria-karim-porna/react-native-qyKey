@@ -45,12 +45,16 @@ Claude Planning: https://claude.ai/chat/e6deb938-fe18-4256-8196-806aa89ac08e
     13. (*) UI of overlay alert and forward navigation alert
     14. (*) Gap in the emoji keyboard for people
     15. After clicking accessibility should also force to on
-    16. emoji, pointer, sym switching issue find
-    17. Test touchpad dragging work if not fix it
+    16. introduce two new icons for windows and shift
+    17. emoji, pointer, sym switching issue find
+    18. Test touchpad dragging work if not fix it
 25. [Done] Fix Touchpad overlay size
 26. [Done] Fix Touchpad button event
-27. Add Icons
-28. Refactor Code
-29. Write Documentation
-30. Understand Code
-31. Decrease Screen size [if possible]
+27. Decrease Screen size [if possible]
+28. Add Icons
+29. Fix splash screen
+30. Fix cache issue
+31. Refactor Code
+32. Make it optimized
+33. Write Documentation
+34. Understand Code

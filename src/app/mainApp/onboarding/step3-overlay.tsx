@@ -18,7 +18,9 @@ export default function Step3Overlay() {
 
   useEffect(() => {
     if (isOverlayGranted) {
-      router.replace('/mainApp/onboarding/step4-done');
+      // Overlay granted → next the MANDATORY accessibility-service step
+      // (the touchpad's cross-app actions require it), then the done screen.
+      router.replace('/mainApp/onboarding/step4-accessibility');
     }
   }, [isOverlayGranted]);
 
@@ -48,7 +50,7 @@ export default function Step3Overlay() {
         <Text style={[styles.buttonText, { color: colors.buttonText }]}>{t.openOverlaySettings}</Text>
       </Pressable>
 
-      <Pressable style={styles.skipButton} onPress={() => router.replace('/mainApp/onboarding/step4-done')}>
+      <Pressable style={styles.skipButton} onPress={() => router.replace('/mainApp/onboarding/step4-accessibility')}>
         <Text style={[styles.skipText, { color: colors.textMuted }]}>{t.skipForNow}</Text>
       </Pressable>
 
